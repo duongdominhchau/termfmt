@@ -11,7 +11,7 @@ bool inRange(int value, int min, int max)
     return min <= value && value <= max;
 }
 
-namespace Terminal {
+namespace termfmt {
 
 // Control
 /**
@@ -203,9 +203,9 @@ std::string ScrollDown(int n = 1)
 }
 
 struct TerminalFormat {
-    const char* const start;
-    const char* const end;
-    TerminalFormat(const char* const start, const char* const end = "\e[m")
+    std::string start;
+    std::string end;
+    TerminalFormat(std::string start, std::string end = "\e[m")
         : start { start }, end { end }
     {
     }
@@ -287,31 +287,32 @@ TerminalFormat BgBrightWhite { "\e[107m" };
 TerminalFormat Fg8bit(int n)
 {
     if (!inRange(n, 0, 255))
-        return "";
-    return fmt::format("\e[38;5;{}m", n).c_str();
+        return { "" };
+    return fmt::format("\e[38;5;{}m", n);
 }
 TerminalFormat Bg8bit(int n)
 {
     if (!inRange(n, 0, 255))
-        return "";
-    return fmt::format("\e[48;5;{}m", n).c_str();
+        return { "" };
+    return fmt::format("\e[48;5;{}m", n);
 }
 // 24-bit color
-TerminalFormat Fg24bit(int red, int green, int blue)
+
+TerminalFormat FgRgb(int red, int green, int blue)
 {
     int min = 0;
     int max = 255;
-    if (!inRange(red, min, max) || !inRange(green, min, max) || !inRange(green, min, max))
-        return "";
-    return fmt::format("\e[38;2;{};{};{}m", red, green, blue).c_str();
+    if (!inRange(red, min, max) || !inRange(green, min, max) || !inRange(blue, min, max))
+        return { "" };
+    return fmt::format("\e[38;2;{};{};{}m", red, green, blue);
 }
-TerminalFormat Bg24bit(int red, int green, int blue)
+TerminalFormat BgRgb(int red, int green, int blue)
 {
     int min = 0;
     int max = 255;
-    if (!inRange(red, min, max) || !inRange(green, min, max) || !inRange(green, min, max))
-        return "";
-    return fmt::format("\e[48;2;{};{};{}m", red, green, blue).c_str();
+    if (!inRange(red, min, max) || !inRange(green, min, max) || !inRange(blue, min, max))
+        return { "" };
+    return fmt::format("\e[48;2;{};{};{}m", red, green, blue);
 }
 
 } // end namespace Terminal
