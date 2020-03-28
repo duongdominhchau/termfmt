@@ -6,7 +6,8 @@ int main()
 {
     using namespace termfmt;
     std::cout << "========== Format test ==========\n";
-    std::cout << termfmt::format({ Bold }, "Bold") << " "
+    std::cout << "Normal "
+            << termfmt::format({ Bold }, "Bold") << " "
             << termfmt::format({ Dim }, "Dim") << " "
             << termfmt::format({ Italic }, "Italic") << " "
             << termfmt::format({ Strikethrough }, "Strikethrough") << " "
