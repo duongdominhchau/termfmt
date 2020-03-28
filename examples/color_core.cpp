@@ -15,6 +15,7 @@ std::string colorExample(termfmt::TerminalFormat color,
 int main()
 {
     using namespace termfmt;
+    std::cout << "========== Core color test ==========\n";
     std::cout << colorExample(FgBlack, "Black") << colorExample(BgBlack, "Black") << "\n";
     std::cout << colorExample(FgRed, "Red") << colorExample(BgRed, "Red") << "\n";
     std::cout << colorExample(FgGreen, "Green") << colorExample(BgGreen, "Green") << "\n";

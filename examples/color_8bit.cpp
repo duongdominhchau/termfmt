@@ -5,6 +5,7 @@
 int main()
 {
     using namespace termfmt;
+    std::cout << "========== 8-bit color test ==========\n";
     std::cout << "* Core:\n";
     for (int i = 0; i < 16; ++i) {
         std::cout << "\t" << fmt::format("{:3d}: ", i)
